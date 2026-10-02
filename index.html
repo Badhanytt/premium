@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>VIP Billionaire Lounge - Private Messenger</title>
+    <title>VIP Billionaire Lounge - Executive Private Messenger</title>
     <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,8 +18,9 @@
             --card-accent: #1a1b23;
             --text-gold: #f3e5ab;
             --text-light: #e4e6eb;
-            --border-gold: rgba(212, 175, 55, 0.25);
-            --gold-glow: 0 0 15px rgba(212, 175, 55, 0.3);
+            --border-gold: rgba(212, 175, 55, 0.35);
+            --gold-glow: 0 0 20px rgba(212, 175, 55, 0.4);
+            --neon-green: #00ff87;
         }
 
         * {
@@ -31,25 +32,25 @@
 
         html, body {
             height: 100%;
-            height: 100dvh; /* Mobile browser dynamic viewport height fix */
+            height: 100dvh;
             width: 100vw;
             background-color: var(--bg-dark);
             color: var(--text-light);
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Page auto scroll off */
+            overflow: hidden;
         }
 
         /* Royal Header */
         header {
-            background: rgba(18, 19, 24, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(18, 19, 24, 0.98);
+            backdrop-filter: blur(12px);
             padding: 12px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             border-bottom: 1px solid var(--border-gold);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
             z-index: 100;
             flex-shrink: 0;
         }
@@ -59,13 +60,13 @@
             align-items: center;
             gap: 10px;
             font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 900;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             cursor: pointer;
             user-select: none;
         }
@@ -73,7 +74,7 @@
         .brand-logo i {
             color: var(--gold-primary);
             -webkit-text-fill-color: initial;
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
         }
 
         .header-controls {
@@ -82,23 +83,32 @@
             gap: 12px;
         }
 
-        /* Balance Badge */
+        /* Upgraded VIP Balance Badge */
         .balance-card {
-            background: var(--card-accent);
-            border: 1px solid var(--border-gold);
-            padding: 6px 14px;
-            border-radius: 20px;
+            background: linear-gradient(145deg, #181a22, #0d0e12);
+            border: 1.5px solid var(--gold-primary);
+            padding: 8px 18px;
+            border-radius: 25px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             box-shadow: var(--gold-glow);
+            transition: all 0.3s ease;
         }
 
-        .balance-card i { color: #00ff87; }
+        .balance-card i { 
+            color: var(--neon-green);
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 135, 0.6));
+        }
+
         .balance-amount {
             color: var(--gold-light);
-            font-weight: 800;
-            font-size: 0.95rem;
+            font-weight: 900;
+            font-size: 1.25rem;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 8px rgba(243, 229, 171, 0.4);
         }
 
         /* Admin Mode Pill */
@@ -106,22 +116,24 @@
             display: none;
             background: var(--gold-gradient);
             color: #000;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 800;
             cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
-        /* Banner */
+        /* VIP Banner */
         .auto-delete-banner {
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.08), rgba(0, 0, 0, 0.9), rgba(212, 175, 55, 0.08));
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.95), rgba(212, 175, 55, 0.12));
             color: var(--gold-light);
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             text-align: center;
-            padding: 6px;
+            padding: 7px;
             border-bottom: 1px solid var(--border-gold);
             flex-shrink: 0;
+            letter-spacing: 0.3px;
         }
 
         /* Main App Layout */
@@ -129,14 +141,14 @@
             display: flex;
             flex: 1;
             height: 100%;
-            min-height: 0; /* Prevents flex children from pushing container */
+            min-height: 0;
             position: relative;
             overflow: hidden;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 300px;
+            width: 310px;
             background: var(--card-dark);
             border-right: 1px solid var(--border-gold);
             display: flex;
@@ -150,10 +162,10 @@
         }
 
         .sidebar-header {
-            padding: 15px;
+            padding: 16px;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: var(--gold-primary);
             border-bottom: 1px solid var(--border-gold);
             display: flex;
@@ -168,29 +180,29 @@
         }
 
         .user-item {
-            padding: 12px 16px;
+            padding: 14px 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             cursor: pointer;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
             transition: all 0.2s;
         }
 
         .user-item:hover, .user-item.active {
-            background: rgba(212, 175, 55, 0.12);
+            background: rgba(212, 175, 55, 0.15);
             border-left: 4px solid var(--gold-primary);
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .user-avatar {
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: var(--gold-gradient);
             display: flex;
@@ -198,8 +210,8 @@
             justify-content: center;
             font-weight: bold;
             color: #000;
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
-            font-size: 0.85rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            font-size: 0.9rem;
         }
 
         /* Chat Area */
@@ -214,20 +226,20 @@
         }
 
         .chat-header {
-            padding: 12px 18px;
+            padding: 14px 20px;
             background: var(--card-dark);
             border-bottom: 1px solid var(--border-gold);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
             flex-shrink: 0;
         }
 
         .chat-user-details {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .btn-back-users {
@@ -235,8 +247,8 @@
             background: transparent;
             border: 1px solid var(--border-gold);
             color: var(--gold-primary);
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
@@ -245,46 +257,46 @@
 
         .chat-header h4 {
             font-family: 'Cinzel', serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: var(--gold-light);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            letter-spacing: 0.5px;
         }
 
         .vip-badge {
             color: #1da1f2;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
-        /* Edit Balance Button for Admin */
         .btn-add-balance {
             background: var(--gold-gradient);
             color: #000;
             border: none;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-weight: 700;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-weight: 800;
             cursor: pointer;
-            font-size: 0.8rem;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            font-size: 0.85rem;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
         }
 
         .chat-messages {
             flex: 1;
-            padding: 18px;
+            padding: 20px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            min-height: 0; /* Ensures proper scroll overflow inside flexbox */
+            gap: 16px;
+            min-height: 0;
         }
 
         /* Message Rows */
         .message-row {
             display: flex;
             flex-direction: column;
-            max-width: 75%;
+            max-width: 78%;
         }
 
         .message-row.sent {
@@ -298,27 +310,28 @@
         }
 
         .sender-info {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             color: var(--gold-primary);
-            margin-bottom: 3px;
-            font-weight: 600;
+            margin-bottom: 4px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .message-bubble {
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 18px;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             position: relative;
             word-break: break-word;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .message-row.sent .message-bubble {
             background: var(--gold-gradient);
             color: #000;
-            font-weight: 500;
+            font-weight: 600;
             border-bottom-right-radius: 4px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
         }
 
         .message-row.received .message-bubble {
@@ -329,56 +342,70 @@
         }
 
         .message-timer {
-            font-size: 0.68rem;
-            margin-top: 4px;
+            font-size: 0.7rem;
+            margin-top: 5px;
             display: flex;
             align-items: center;
-            gap: 4px;
-            opacity: 0.85;
+            gap: 5px;
+            font-weight: 600;
         }
 
-        .message-row.sent .message-timer { color: #222; }
+        .message-row.sent .message-timer { color: #111; }
         .message-row.received .message-timer { color: var(--gold-primary); }
+
+        .status-waiting {
+            color: #888;
+            font-style: italic;
+        }
 
         /* Input Area */
         .chat-input-area {
-            padding: 12px 18px;
+            padding: 14px 20px;
             background: var(--card-dark);
             border-top: 1px solid var(--border-gold);
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-shrink: 0; /* Ensures input box never shrinks or gets pushed down */
+            gap: 12px;
+            flex-shrink: 0;
         }
 
         .chat-input {
             flex: 1;
-            padding: 12px 18px;
-            border-radius: 25px;
-            border: 1px solid var(--border-gold);
+            padding: 14px 20px;
+            border-radius: 30px;
+            border: 1.5px solid var(--border-gold);
             outline: none;
             background: var(--bg-dark);
             color: var(--gold-light);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+        }
+
+        .chat-input::placeholder {
+            color: rgba(243, 229, 171, 0.4);
         }
 
         .btn-send {
             background: var(--gold-gradient);
             color: #000;
             border: none;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            font-size: 1.1rem;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
             flex-shrink: 0;
+            transition: transform 0.2s;
         }
 
-        /* Mobile View Full Screen Fix */
+        .btn-send:active {
+            transform: scale(0.92);
+        }
+
+        /* Mobile View Fixes */
         @media (max-width: 768px) {
             .sidebar {
                 position: absolute;
@@ -412,14 +439,14 @@
             </div>
 
             <div id="adminIndicator" class="admin-indicator" onclick="exitAdminMode()">
-                👑 Exit Admin
+                👑 Exit Executive Control
             </div>
         </div>
     </header>
 
     <!-- Banner -->
     <div class="auto-delete-banner">
-        <i class="fa-solid fa-shield-halved"></i> <b>VIP PRIVACY:</b> মেসেজ পাঠানোর <b>৫ মিনিট (৩০০s)</b> পর ডিলিট হয়ে যাবে।
+        <i class="fa-solid fa-user-shield"></i> <b>END-TO-END ENCRYPTED:</b> উত্তর প্রদানের ১ মিনিট ($60\text{s}$) পর বার্তা স্বয়ংক্রিয়ভাবে মুছে যাবে।
     </div>
 
     <!-- Container -->
@@ -427,7 +454,7 @@
         <!-- Sidebar -->
         <div class="sidebar hidden-user" id="adminSidebar">
             <div class="sidebar-header">
-                <span>👑 VIP Clients List</span>
+                <span>👑 VIP Billionaire Clients</span>
             </div>
             <ul class="user-list" id="adminUserList"></ul>
         </div>
@@ -444,15 +471,15 @@
                     </div>
                     <div>
                         <h4 id="activeChatTitle">
-                            CEO / Lord Desk <i class="fa-solid fa-circle-check vip-badge"></i>
+                            Chairman & CEO Desk <i class="fa-solid fa-circle-check vip-badge"></i>
                         </h4>
-                        <small id="userStatusSub" style="color: #00ff87; font-size: 0.75rem;">● Ultra-Private VIP Desk Online</small>
+                        <small id="userStatusSub" style="color: var(--neon-green); font-size: 0.78rem;">● Secured Direct Line Active</small>
                     </div>
                 </div>
 
                 <div id="adminActionBox" style="display: none;">
                     <button class="btn-add-balance" onclick="giveBalanceToUser()">
-                        <i class="fa-solid fa-pen-to-square"></i> Edit Balance
+                        <i class="fa-solid fa-pen-to-square"></i> Update Balance
                     </button>
                 </div>
             </div>
@@ -462,7 +489,7 @@
 
             <!-- Input Box -->
             <div class="chat-input-area">
-                <input type="text" id="messageInput" class="chat-input" placeholder="আপনার গোপন বার্তা লিখুন..." onkeypress="handleKeyPress(event)">
+                <input type="text" id="messageInput" class="chat-input" placeholder="বোর্ড চেয়ারম্যানের জন্য গোপন বার্তা লিখুন..." onkeypress="handleKeyPress(event)">
                 <button class="btn-send" onclick="sendMessage()">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
@@ -490,9 +517,8 @@
         const db = getDatabase(app);
 
         let currentRole = "user"; 
-        const DELETE_AFTER_MS = 5 * 60 * 1000;
+        const DELETE_DELAY_MS = 60 * 1000; // 1 minute countdown after reply
 
-        // --- UNIQUE DEVICE IDENTIFIER SYSTEM (PERMANENT ACC LOCK) ---
         function getDeviceUID() {
             let id = localStorage.getItem("permanent_vip_device_id");
             if (!id) {
@@ -520,10 +546,10 @@
         // Realtime Balance update for User Header
         onValue(ref(db, `users/${myUserId}/balance`), (snap) => {
             const bal = snap.val() || 0.00;
-            document.getElementById("lblUserBalance").innerText = "$" + parseFloat(bal).toFixed(2);
+            document.getElementById("lblUserBalance").innerText = "$" + parseFloat(bal).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         });
 
-        // --- SECRET TRIPLE CLICK FOR ADMIN ---
+        // Secret Admin Entrance
         let clickCount = 0;
         let clickTimer = null;
 
@@ -533,11 +559,11 @@
 
             if (clickCount >= 3) {
                 clickCount = 0;
-                let pass = prompt("🔐 Enter Secret Admin Password:");
+                let pass = prompt("🔐 Enter Executive Access Key:");
                 if (pass === "admin1234") {
                     enterAdminMode();
                 } else if (pass !== null) {
-                    alert("❌ Wrong Password!");
+                    alert("❌ Invalid Authorization Key!");
                 }
             } else {
                 clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
@@ -573,31 +599,32 @@
         };
 
         function setupUserHeader() {
-            document.getElementById("activeChatTitle").innerHTML = `CEO / Lord Desk <i class="fa-solid fa-circle-check vip-badge"></i>`;
-            document.getElementById("userStatusSub").innerText = "● Ultra-Private VIP Desk Online";
+            document.getElementById("activeChatTitle").innerHTML = `Chairman & CEO Desk <i class="fa-solid fa-circle-check vip-badge"></i>`;
+            document.getElementById("userStatusSub").innerText = "● Secured Direct Line Active";
+            document.getElementById("messageInput").placeholder = "বোর্ড চেয়ারম্যানের জন্য গোপন বার্তা লিখুন...";
         }
 
-        // Admin: Balance Edit Action
+        // Admin Edit Balance
         window.giveBalanceToUser = function() {
             if (currentRole !== "admin" || !selectedChatUser) return;
             
             get(ref(db, `users/${selectedChatUser}/balance`)).then((snap) => {
                 let currentBal = snap.val() || 0;
-                let amount = prompt(`Client [${selectedChatUser}]-এর বর্তমান ব্যালেন্স: $${currentBal}\n\nনতুন ব্যালেন্স কত করতে চান? ($):`, currentBal);
+                let amount = prompt(`VIP Client [${selectedChatUser}]-এর বর্তমান ক্রেডিট: $${currentBal}\n\nনতুন ব্যালেন্স কত প্রদান করতে চান? ($):`, currentBal);
                 let parsedAmount = parseFloat(amount);
 
                 if (!isNaN(parsedAmount) && parsedAmount >= 0) {
                     update(ref(db, `users/${selectedChatUser}`), {
                         balance: parsedAmount
                     }).then(() => {
-                        alert(`✅ ${selectedChatUser}-এর নতুন ব্যালেন্স: $${parsedAmount}`);
+                        alert(`✅ Client ${selectedChatUser}-এর নতুন ফান্ড যুক্ত হয়েছে: $${parsedAmount}`);
                         document.getElementById("userStatusSub").innerText = `Client Balance: $${parsedAmount.toFixed(2)}`;
                     });
                 }
             });
         };
 
-        // Send Message
+        // Send Message with Intelligent Expiry Tracking
         window.sendMessage = function() {
             const input = document.getElementById("messageInput");
             const text = input.value.trim();
@@ -605,16 +632,34 @@
 
             const chatRoomId = currentRole === "admin" ? selectedChatUser : myUserId;
             const messagesRef = ref(db, `chats/${chatRoomId}`);
-            const newMsgRef = push(messagesRef);
+            
+            // Check previous unreplied messages from opposite party to activate their timer
+            get(messagesRef).then((snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    Object.keys(data).forEach((msgId) => {
+                        const m = data[msgId];
+                        // If reply is given, start expiry countdown for messages that haven't expired yet
+                        if (m.sender !== currentRole && !m.expireAt) {
+                            update(ref(db, `chats/${chatRoomId}/${msgId}`), {
+                                expireAt: Date.now() + DELETE_DELAY_MS
+                            });
+                        }
+                    });
+                }
 
-            const msgData = {
-                sender: currentRole,
-                text: text,
-                timestamp: Date.now()
-            };
+                // Push current message
+                const newMsgRef = push(messagesRef);
+                const msgData = {
+                    sender: currentRole,
+                    text: text,
+                    timestamp: Date.now(),
+                    expireAt: null // Will remain null until opposite party replies!
+                };
 
-            set(newMsgRef, msgData).then(() => {
-                input.value = "";
+                set(newMsgRef, msgData).then(() => {
+                    input.value = "";
+                });
             });
         };
 
@@ -622,7 +667,7 @@
             if (e.key === "Enter") sendMessage();
         };
 
-        // Admin User List Realtime Update
+        // Admin User List
         function listenUserListAdmin() {
             onValue(ref(db, 'users'), (snapshot) => {
                 const list = document.getElementById("adminUserList");
@@ -630,7 +675,7 @@
                 const users = snapshot.val();
 
                 if (!users) {
-                    list.innerHTML = "<li style='padding:15px; color:#888;'>কোনো ইউজারের লিস্ট পাওয়া যায়নি</li>";
+                    list.innerHTML = "<li style='padding:15px; color:#888;'>কোনো VIP মক্কেলের তালিকা পাওয়া যায়নি</li>";
                     return;
                 }
 
@@ -643,16 +688,16 @@
                             <div class="user-avatar">${uid.substring(0, 4)}</div>
                             <div>
                                 <strong style="color:var(--gold-light);">${uid}</strong>
-                                <br><small style="color:#00ff87;">Bal: $${(u.balance || 0).toFixed(2)}</small>
+                                <br><small style="color:var(--neon-green);">Credit: $${(u.balance || 0).toFixed(2)}</small>
                             </div>
                         </div>
                     `;
                     item.onclick = () => {
                         selectedChatUser = uid;
-                        document.getElementById("activeChatTitle").innerHTML = `Client: ${uid} <i class="fa-solid fa-circle-check vip-badge"></i>`;
+                        document.getElementById("activeChatTitle").innerHTML = `Client ID: ${uid} <i class="fa-solid fa-circle-check vip-badge"></i>`;
                         document.getElementById("userStatusSub").innerText = `Client Balance: $${(u.balance || 0).toFixed(2)}`;
+                        document.getElementById("messageInput").placeholder = `${uid}-কে প্রাইভেট উত্তর পাঠান...`;
                         
-                        // Hide Sidebar on mobile to show full screen chat
                         if (window.innerWidth <= 768) {
                             document.getElementById("adminSidebar").classList.add("mobile-hide");
                             document.getElementById("btnBackUsers").style.display = "flex";
@@ -666,7 +711,7 @@
             });
         }
 
-        // Realtime Messages & Auto Delete
+        // Realtime Messages Engine
         function listenMessages() {
             const targetUser = currentRole === "admin" ? selectedChatUser : myUserId;
             if (!targetUser) return;
@@ -677,7 +722,7 @@
                 const data = snapshot.val();
 
                 if (!data) {
-                    container.innerHTML = "<div style='text-align:center; color:#888; margin-top:20px;'>গোপন চ্যাট শুরু করুন...</div>";
+                    container.innerHTML = "<div style='text-align:center; color:#888; margin-top:20px;'><i class='fa-solid fa-lock'></i> এনক্রিপ্টেড প্রাইভেট চ্যানেল প্রস্তুত। আপনার বার্তা পাঠান...</div>";
                     return;
                 }
 
@@ -685,9 +730,9 @@
 
                 Object.keys(data).forEach((msgId) => {
                     const msg = data[msgId];
-                    const age = now - msg.timestamp;
 
-                    if (age >= DELETE_AFTER_MS) {
+                    // Realtime Auto-Delete check on expireAt
+                    if (msg.expireAt && now >= msg.expireAt) {
                         remove(ref(db, `chats/${targetUser}/${msgId}`));
                         return;
                     }
@@ -698,14 +743,20 @@
                     const row = document.createElement("div");
                     row.className = `message-row ${isSentByMe ? 'sent' : 'received'}`;
 
-                    const remainingSeconds = Math.max(0, Math.floor((DELETE_AFTER_MS - age) / 1000));
+                    let timerText = "";
+                    if (msg.expireAt) {
+                        const remainingSeconds = Math.max(0, Math.floor((msg.expireAt - now) / 1000));
+                        timerText = `<i class="fa-regular fa-clock"></i> <span class="time-count" data-expire="${msg.expireAt}">${remainingSeconds}s</span> (মুছে যাচ্ছে)`;
+                    } else {
+                        timerText = `<i class="fa-solid fa-check-double"></i> <span class="status-waiting">উত্তর পাওয়ার অপেক্ষায়...</span>`;
+                    }
 
                     row.innerHTML = `
-                        <div class="sender-info">${msg.sender === 'admin' ? '👑 Lord / CEO' : '👤 VIP Client'}</div>
+                        <div class="sender-info">${msg.sender === 'admin' ? '👑 Chairman & CEO' : '👤 VIP Client'}</div>
                         <div class="message-bubble">
                             ${escapeHTML(msg.text)}
-                            <div class="message-timer" id="timer-${msgId}">
-                                <i class="fa-regular fa-clock"></i> <span class="time-count">${remainingSeconds}s</span>
+                            <div class="message-timer">
+                                ${timerText}
                             </div>
                         </div>
                     `;
@@ -723,15 +774,16 @@
             );
         }
 
-        // Countdown Timer
+        // Timer Loop
         setInterval(() => {
-            const timers = document.querySelectorAll(".message-timer");
-            timers.forEach((timerEl) => {
-                const span = timerEl.querySelector(".time-count");
-                if (span) {
-                    let secs = parseInt(span.innerText);
-                    if (secs > 1) {
-                        span.innerText = (secs - 1) + "s";
+            const now = Date.now();
+            const timers = document.querySelectorAll(".time-count");
+            timers.forEach((span) => {
+                const expireAt = parseInt(span.getAttribute("data-expire"));
+                if (expireAt) {
+                    let secs = Math.max(0, Math.floor((expireAt - now) / 1000));
+                    if (secs > 0) {
+                        span.innerText = secs + "s";
                     } else {
                         span.innerText = "Deleting...";
                     }
