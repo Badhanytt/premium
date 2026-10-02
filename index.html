@@ -41,11 +41,11 @@
             overflow: hidden;
         }
 
-        /* Royal Header */
+        /* Responsive Royal Header */
         header {
             background: rgba(18, 19, 24, 0.98);
             backdrop-filter: blur(12px);
-            padding: 12px 20px;
+            padding: 10px 12px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -53,87 +53,89 @@
             box-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
             z-index: 100;
             flex-shrink: 0;
+            gap: 8px;
         }
 
         .brand-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             font-family: 'Cinzel', serif;
-            font-size: 1.15rem;
+            font-size: 0.95rem;
             font-weight: 900;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 0.5px;
             cursor: pointer;
             user-select: none;
+            white-space: nowrap;
         }
 
         .brand-logo i {
             color: var(--gold-primary);
             -webkit-text-fill-color: initial;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.8));
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
         }
 
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 6px;
+            flex-wrap: nowrap;
         }
 
-        /* Upgraded VIP Balance Badge */
+        /* Compact VIP Balance Badge */
         .balance-card {
             background: linear-gradient(145deg, #181a22, #0d0e12);
-            border: 1.5px solid var(--gold-primary);
-            padding: 8px 18px;
-            border-radius: 25px;
+            border: 1px solid var(--gold-primary);
+            padding: 5px 10px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
             box-shadow: var(--gold-glow);
-            transition: all 0.3s ease;
+            white-space: nowrap;
         }
 
         .balance-card i { 
             color: var(--neon-green);
-            font-size: 1.2rem;
-            filter: drop-shadow(0 0 5px rgba(0, 255, 135, 0.6));
+            font-size: 1rem;
+            filter: drop-shadow(0 0 4px rgba(0, 255, 135, 0.6));
         }
 
         .balance-amount {
             color: var(--gold-light);
             font-weight: 900;
-            font-size: 1.25rem;
+            font-size: 1.05rem;
             font-family: 'Cinzel', serif;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 8px rgba(243, 229, 171, 0.4);
+            letter-spacing: 0.3px;
         }
 
-        /* Admin Mode Pill */
+        /* Mobile Responsive Admin Exit Button */
         .admin-indicator {
             display: none;
             background: var(--gold-gradient);
             color: #000;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 0.72rem;
             font-weight: 800;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
+            white-space: nowrap;
         }
 
         /* VIP Banner */
         .auto-delete-banner {
             background: linear-gradient(90deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.95), rgba(212, 175, 55, 0.12));
             color: var(--gold-light);
-            font-size: 0.82rem;
+            font-size: 0.75rem;
             text-align: center;
-            padding: 7px;
+            padding: 5px;
             border-bottom: 1px solid var(--border-gold);
             flex-shrink: 0;
-            letter-spacing: 0.3px;
         }
 
         /* Main App Layout */
@@ -148,7 +150,7 @@
 
         /* Sidebar */
         .sidebar {
-            width: 310px;
+            width: 300px;
             background: var(--card-dark);
             border-right: 1px solid var(--border-gold);
             display: flex;
@@ -162,10 +164,10 @@
         }
 
         .sidebar-header {
-            padding: 16px;
+            padding: 12px;
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--gold-primary);
             border-bottom: 1px solid var(--border-gold);
             display: flex;
@@ -180,7 +182,7 @@
         }
 
         .user-item {
-            padding: 14px 18px;
+            padding: 10px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -197,12 +199,12 @@
         .user-info {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             background: var(--gold-gradient);
             display: flex;
@@ -210,11 +212,11 @@
             justify-content: center;
             font-weight: bold;
             color: #000;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
-            font-size: 0.9rem;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            font-size: 0.85rem;
         }
 
-        /* Chat Area */
+        /* Chat Area - Compact Space */
         .chat-area {
             flex: 1;
             display: flex;
@@ -226,7 +228,7 @@
         }
 
         .chat-header {
-            padding: 14px 20px;
+            padding: 10px 14px;
             background: var(--card-dark);
             border-bottom: 1px solid var(--border-gold);
             display: flex;
@@ -239,7 +241,7 @@
         .chat-user-details {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 10px;
         }
 
         .btn-back-users {
@@ -247,8 +249,8 @@
             background: transparent;
             border: 1px solid var(--border-gold);
             color: var(--gold-primary);
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
@@ -257,38 +259,38 @@
 
         .chat-header h4 {
             font-family: 'Cinzel', serif;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: var(--gold-light);
             display: flex;
             align-items: center;
-            gap: 8px;
-            letter-spacing: 0.5px;
+            gap: 6px;
         }
 
         .vip-badge {
             color: #1da1f2;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .btn-add-balance {
             background: var(--gold-gradient);
             color: #000;
             border: none;
-            padding: 7px 15px;
-            border-radius: 20px;
+            padding: 5px 10px;
+            border-radius: 15px;
             font-weight: 800;
             cursor: pointer;
-            font-size: 0.85rem;
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+            font-size: 0.78rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
         }
 
+        /* Compact Messages Area */
         .chat-messages {
             flex: 1;
-            padding: 20px;
+            padding: 12px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 8px;
             min-height: 0;
         }
 
@@ -296,7 +298,7 @@
         .message-row {
             display: flex;
             flex-direction: column;
-            max-width: 78%;
+            max-width: 82%;
         }
 
         .message-row.sent {
@@ -310,43 +312,52 @@
         }
 
         .sender-info {
-            font-size: 0.75rem;
+            font-size: 0.68rem;
             color: var(--gold-primary);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .message-bubble {
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 0.95rem;
+            padding: 8px 12px;
+            border-radius: 14px;
+            font-size: 0.9rem;
             position: relative;
             word-break: break-word;
-            line-height: 1.5;
+            line-height: 1.35;
         }
 
         .message-row.sent .message-bubble {
             background: var(--gold-gradient);
             color: #000;
             font-weight: 600;
-            border-bottom-right-radius: 4px;
-            box-shadow: 0 4px 18px rgba(212, 175, 55, 0.25);
+            border-bottom-right-radius: 2px;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.2);
         }
 
         .message-row.received .message-bubble {
             background: var(--card-accent);
             color: var(--text-light);
             border: 1px solid var(--border-gold);
-            border-bottom-left-radius: 4px;
+            border-bottom-left-radius: 2px;
+        }
+
+        .chat-img-msg {
+            max-width: 220px;
+            max-height: 250px;
+            border-radius: 10px;
+            margin-top: 4px;
+            border: 1px solid var(--border-gold);
+            cursor: pointer;
+            display: block;
         }
 
         .message-timer {
-            font-size: 0.7rem;
-            margin-top: 5px;
+            font-size: 0.65rem;
+            margin-top: 3px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             font-weight: 600;
         }
 
@@ -358,26 +369,46 @@
             font-style: italic;
         }
 
-        /* Input Area */
+        /* Compact Input Area */
         .chat-input-area {
-            padding: 14px 20px;
+            padding: 8px 12px;
             background: var(--card-dark);
             border-top: 1px solid var(--border-gold);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             flex-shrink: 0;
+        }
+
+        .btn-attach-img {
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            color: var(--gold-primary);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .btn-attach-img:hover {
+            background: rgba(212, 175, 55, 0.15);
         }
 
         .chat-input {
             flex: 1;
-            padding: 14px 20px;
-            border-radius: 30px;
-            border: 1.5px solid var(--border-gold);
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-gold);
             outline: none;
             background: var(--bg-dark);
             color: var(--gold-light);
-            font-size: 0.95rem;
+            font-size: 0.88rem;
         }
 
         .chat-input::placeholder {
@@ -388,25 +419,32 @@
             background: var(--gold-gradient);
             color: #000;
             border: none;
-            width: 48px;
-            height: 48px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
-            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+            font-size: 0.95rem;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
             flex-shrink: 0;
-            transition: transform 0.2s;
         }
 
-        .btn-send:active {
-            transform: scale(0.92);
+        /* Loading Spinner */
+        .upload-spinner {
+            display: none;
+            color: var(--gold-primary);
+            font-size: 0.8rem;
+            align-items: center;
+            gap: 5px;
         }
 
-        /* Mobile View Fixes */
+        /* Mobile Fixes */
         @media (max-width: 768px) {
+            .brand-logo span {
+                font-size: 0.82rem;
+            }
             .sidebar {
                 position: absolute;
                 width: 100%;
@@ -439,14 +477,14 @@
             </div>
 
             <div id="adminIndicator" class="admin-indicator" onclick="exitAdminMode()">
-                👑 Exit Executive Control
+                👑 Exit
             </div>
         </div>
     </header>
 
     <!-- Banner -->
     <div class="auto-delete-banner">
-        <i class="fa-solid fa-user-shield"></i> <b>END-TO-END ENCRYPTED:</b> উত্তর প্রদানের ১ মিনিট ($60\text{s}$) পর বার্তা স্বয়ংক্রিয়ভাবে মুছে যাবে।
+        <i class="fa-solid fa-user-shield"></i> <b>SECURE:</b> উত্তর দিলে ১ মিনিট ($60\text{s}$) পর মুছে যাবে। ছবি ১০ মিনিটে অটো-ডিলিট।
     </div>
 
     <!-- Container -->
@@ -454,7 +492,7 @@
         <!-- Sidebar -->
         <div class="sidebar hidden-user" id="adminSidebar">
             <div class="sidebar-header">
-                <span>👑 VIP Billionaire Clients</span>
+                <span>👑 VIP Clients</span>
             </div>
             <ul class="user-list" id="adminUserList"></ul>
         </div>
@@ -473,13 +511,13 @@
                         <h4 id="activeChatTitle">
                             Chairman & CEO Desk <i class="fa-solid fa-circle-check vip-badge"></i>
                         </h4>
-                        <small id="userStatusSub" style="color: var(--neon-green); font-size: 0.78rem;">● Secured Direct Line Active</small>
+                        <small id="userStatusSub" style="color: var(--neon-green); font-size: 0.72rem;">● Secured Line Active</small>
                     </div>
                 </div>
 
                 <div id="adminActionBox" style="display: none;">
                     <button class="btn-add-balance" onclick="giveBalanceToUser()">
-                        <i class="fa-solid fa-pen-to-square"></i> Update Balance
+                        <i class="fa-solid fa-pen-to-square"></i> Balance
                     </button>
                 </div>
             </div>
@@ -489,7 +527,17 @@
 
             <!-- Input Box -->
             <div class="chat-input-area">
-                <input type="text" id="messageInput" class="chat-input" placeholder="বোর্ড চেয়ারম্যানের জন্য গোপন বার্তা লিখুন..." onkeypress="handleKeyPress(event)">
+                <input type="file" id="imgInput" accept="image/*" style="display: none;" onchange="uploadAndSendImage(event)">
+                <button class="btn-attach-img" onclick="document.getElementById('imgInput').click()" title="গোপন ছবি পাঠান">
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+
+                <input type="text" id="messageInput" class="chat-input" placeholder="গোপন বার্তা লিখুন..." onkeypress="handleKeyPress(event)">
+                
+                <div class="upload-spinner" id="uploadSpinner">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                </div>
+
                 <button class="btn-send" onclick="sendMessage()">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
@@ -515,6 +563,10 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
+        // ImgBB API Key (Free API Key)
+        const IMGBB_API_KEY = "3b088b7762630bb39b4f9a0c8b6d8a25"; 
+        const IMGBB_AUTO_EXPIRE_SECONDS = 600; // 10 Minutes Auto-Delete from ImgBB Storage
 
         let currentRole = "user"; 
         const DELETE_DELAY_MS = 60 * 1000; // 1 minute countdown after reply
@@ -559,11 +611,11 @@
 
             if (clickCount >= 3) {
                 clickCount = 0;
-                let pass = prompt("🔐 Enter Executive Access Key:");
+                let pass = prompt("🔐 Enter Access Key:");
                 if (pass === "admin1234") {
                     enterAdminMode();
                 } else if (pass !== null) {
-                    alert("❌ Invalid Authorization Key!");
+                    alert("❌ Invalid Access Key!");
                 }
             } else {
                 clickTimer = setTimeout(() => { clickCount = 0; }, 1000);
@@ -601,7 +653,7 @@
         function setupUserHeader() {
             document.getElementById("activeChatTitle").innerHTML = `Chairman & CEO Desk <i class="fa-solid fa-circle-check vip-badge"></i>`;
             document.getElementById("userStatusSub").innerText = "● Secured Direct Line Active";
-            document.getElementById("messageInput").placeholder = "বোর্ড চেয়ারম্যানের জন্য গোপন বার্তা লিখুন...";
+            document.getElementById("messageInput").placeholder = "গোপন বার্তা লিখুন...";
         }
 
         // Admin Edit Balance
@@ -610,7 +662,7 @@
             
             get(ref(db, `users/${selectedChatUser}/balance`)).then((snap) => {
                 let currentBal = snap.val() || 0;
-                let amount = prompt(`VIP Client [${selectedChatUser}]-এর বর্তমান ক্রেডিট: $${currentBal}\n\nনতুন ব্যালেন্স কত প্রদান করতে চান? ($):`, currentBal);
+                let amount = prompt(`VIP Client [${selectedChatUser}]-এর বর্তমান ক্রেডিট: $${currentBal}\n\nনতুন ব্যালেন্স কত করতে চান? ($):`, currentBal);
                 let parsedAmount = parseFloat(amount);
 
                 if (!isNaN(parsedAmount) && parsedAmount >= 0) {
@@ -624,22 +676,59 @@
             });
         };
 
-        // Send Message with Intelligent Expiry Tracking
+        // Send Text Message
         window.sendMessage = function() {
             const input = document.getElementById("messageInput");
             const text = input.value.trim();
             if (!text) return;
 
+            pushMsgToFirebase({ text: text, type: "text" });
+            input.value = "";
+        };
+
+        // ImgBB Auto-Delete Image Upload Function
+        window.uploadAndSendImage = function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const spinner = document.getElementById("uploadSpinner");
+            spinner.style.display = "flex";
+
+            const formData = new FormData();
+            formData.append("image", file);
+
+            // ImgBB API Request with expiration (10 minutes = 600 seconds)
+            fetch(`https://api.imgbb.com/1/upload?expiration=${IMGBB_AUTO_EXPIRE_SECONDS}&key=${IMGBB_API_KEY}`, {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                spinner.style.display = "none";
+                if (data.success) {
+                    const imgUrl = data.data.url;
+                    pushMsgToFirebase({ imageUrl: imgUrl, type: "image" });
+                    document.getElementById("imgInput").value = "";
+                } else {
+                    alert("❌ ছবি আপলোড ব্যর্থ হয়েছে! আবার চেষ্টা করুন।");
+                }
+            })
+            .catch(err => {
+                spinner.style.display = "none";
+                alert("❌ নেটওয়ার্ক ত্রুটি! ছবি আপলোড করা যায়নি।");
+            });
+        };
+
+        // Push Message Engine
+        function pushMsgToFirebase(payload) {
             const chatRoomId = currentRole === "admin" ? selectedChatUser : myUserId;
             const messagesRef = ref(db, `chats/${chatRoomId}`);
             
-            // Check previous unreplied messages from opposite party to activate their timer
             get(messagesRef).then((snapshot) => {
                 const data = snapshot.val();
                 if (data) {
                     Object.keys(data).forEach((msgId) => {
                         const m = data[msgId];
-                        // If reply is given, start expiry countdown for messages that haven't expired yet
                         if (m.sender !== currentRole && !m.expireAt) {
                             update(ref(db, `chats/${chatRoomId}/${msgId}`), {
                                 expireAt: Date.now() + DELETE_DELAY_MS
@@ -648,20 +737,19 @@
                     });
                 }
 
-                // Push current message
                 const newMsgRef = push(messagesRef);
                 const msgData = {
                     sender: currentRole,
-                    text: text,
+                    type: payload.type || "text",
+                    text: payload.text || "",
+                    imageUrl: payload.imageUrl || "",
                     timestamp: Date.now(),
-                    expireAt: null // Will remain null until opposite party replies!
+                    expireAt: null 
                 };
 
-                set(newMsgRef, msgData).then(() => {
-                    input.value = "";
-                });
+                set(newMsgRef, msgData);
             });
-        };
+        }
 
         window.handleKeyPress = function(e) {
             if (e.key === "Enter") sendMessage();
@@ -675,7 +763,7 @@
                 const users = snapshot.val();
 
                 if (!users) {
-                    list.innerHTML = "<li style='padding:15px; color:#888;'>কোনো VIP মক্কেলের তালিকা পাওয়া যায়নি</li>";
+                    list.innerHTML = "<li style='padding:12px; color:#888;'>কোনো VIP ক্লায়েন্ট নেই</li>";
                     return;
                 }
 
@@ -687,16 +775,15 @@
                         <div class="user-info">
                             <div class="user-avatar">${uid.substring(0, 4)}</div>
                             <div>
-                                <strong style="color:var(--gold-light);">${uid}</strong>
-                                <br><small style="color:var(--neon-green);">Credit: $${(u.balance || 0).toFixed(2)}</small>
+                                <strong style="color:var(--gold-light); font-size:0.85rem;">${uid}</strong>
+                                <br><small style="color:var(--neon-green); font-size:0.75rem;">Credit: $${(u.balance || 0).toFixed(2)}</small>
                             </div>
                         </div>
                     `;
                     item.onclick = () => {
                         selectedChatUser = uid;
-                        document.getElementById("activeChatTitle").innerHTML = `Client ID: ${uid} <i class="fa-solid fa-circle-check vip-badge"></i>`;
+                        document.getElementById("activeChatTitle").innerHTML = `Client: ${uid} <i class="fa-solid fa-circle-check vip-badge"></i>`;
                         document.getElementById("userStatusSub").innerText = `Client Balance: $${(u.balance || 0).toFixed(2)}`;
-                        document.getElementById("messageInput").placeholder = `${uid}-কে প্রাইভেট উত্তর পাঠান...`;
                         
                         if (window.innerWidth <= 768) {
                             document.getElementById("adminSidebar").classList.add("mobile-hide");
@@ -722,7 +809,7 @@
                 const data = snapshot.val();
 
                 if (!data) {
-                    container.innerHTML = "<div style='text-align:center; color:#888; margin-top:20px;'><i class='fa-solid fa-lock'></i> এনক্রিপ্টেড প্রাইভেট চ্যানেল প্রস্তুত। আপনার বার্তা পাঠান...</div>";
+                    container.innerHTML = "<div style='text-align:center; color:#888; margin-top:20px; font-size:0.85rem;'><i class='fa-solid fa-lock'></i> এনক্রিপ্টেড প্রাইভেট চ্যানেল প্রস্তুত।</div>";
                     return;
                 }
 
@@ -731,7 +818,6 @@
                 Object.keys(data).forEach((msgId) => {
                     const msg = data[msgId];
 
-                    // Realtime Auto-Delete check on expireAt
                     if (msg.expireAt && now >= msg.expireAt) {
                         remove(ref(db, `chats/${targetUser}/${msgId}`));
                         return;
@@ -746,15 +832,22 @@
                     let timerText = "";
                     if (msg.expireAt) {
                         const remainingSeconds = Math.max(0, Math.floor((msg.expireAt - now) / 1000));
-                        timerText = `<i class="fa-regular fa-clock"></i> <span class="time-count" data-expire="${msg.expireAt}">${remainingSeconds}s</span> (মুছে যাচ্ছে)`;
+                        timerText = `<i class="fa-regular fa-clock"></i> <span class="time-count" data-expire="${msg.expireAt}">${remainingSeconds}s</span>`;
                     } else {
-                        timerText = `<i class="fa-solid fa-check-double"></i> <span class="status-waiting">উত্তর পাওয়ার অপেক্ষায়...</span>`;
+                        timerText = `<i class="fa-solid fa-check-double"></i> <span class="status-waiting">অপেক্ষায়...</span>`;
+                    }
+
+                    let contentHtml = "";
+                    if (msg.type === "image") {
+                        contentHtml = `<a href="${msg.imageUrl}" target="_blank"><img src="${msg.imageUrl}" class="chat-img-msg" alt="Secret Image" /></a>`;
+                    } else {
+                        contentHtml = escapeHTML(msg.text);
                     }
 
                     row.innerHTML = `
                         <div class="sender-info">${msg.sender === 'admin' ? '👑 Chairman & CEO' : '👤 VIP Client'}</div>
                         <div class="message-bubble">
-                            ${escapeHTML(msg.text)}
+                            ${contentHtml}
                             <div class="message-timer">
                                 ${timerText}
                             </div>
@@ -774,7 +867,7 @@
             );
         }
 
-        // Timer Loop
+        // Realtime Timer Loop
         setInterval(() => {
             const now = Date.now();
             const timers = document.querySelectorAll(".time-count");
