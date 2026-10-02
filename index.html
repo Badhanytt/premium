@@ -564,12 +564,12 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // ImgBB API Key (Free API Key)
-        const IMGBB_API_KEY = "3b088b7762630bb39b4f9a0c8b6d8a25"; 
-        const IMGBB_AUTO_EXPIRE_SECONDS = 600; // 10 Minutes Auto-Delete from ImgBB Storage
+        // Updated ImgBB API Key
+        const IMGBB_API_KEY = "3ec345422ccf840557d8e17a1dd451fb"; 
+        const IMGBB_AUTO_EXPIRE_SECONDS = 600; // 10 Minutes Auto-Delete
 
         let currentRole = "user"; 
-        const DELETE_DELAY_MS = 60 * 1000; // 1 minute countdown after reply
+        const DELETE_DELAY_MS = 60 * 1000; // 1 minute countdown
 
         function getDeviceUID() {
             let id = localStorage.getItem("permanent_vip_device_id");
@@ -697,7 +697,6 @@
             const formData = new FormData();
             formData.append("image", file);
 
-            // ImgBB API Request with expiration (10 minutes = 600 seconds)
             fetch(`https://api.imgbb.com/1/upload?expiration=${IMGBB_AUTO_EXPIRE_SECONDS}&key=${IMGBB_API_KEY}`, {
                 method: "POST",
                 body: formData
