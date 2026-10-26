@@ -583,7 +583,7 @@
         let myUserId = getDeviceUID();
         let selectedChatUser = myUserId;
 
-        // Save new user profile if not exist
+        // Save new user profile if not exist with default balance 0.00
         const userRef = ref(db, `users/${myUserId}`);
         get(userRef).then((snapshot) => {
             if (!snapshot.exists()) {
@@ -595,10 +595,10 @@
             }
         });
 
-        // Realtime Balance update for User Header
+        // Realtime Balance update for User Header with proper fallback
         onValue(ref(db, `users/${myUserId}/balance`), (snap) => {
-            const bal = snap.val() || 0.00;
-            document.getElementById("lblUserBalance").innerText = "$" + parseFloat(bal).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            const bal = snap.exists() ? snap.val() : 0.00;
+            document.getElementById("lblUserBalance").innerText = "$" + parseFloat(bal || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         });
 
         // Secret Admin Entrance
@@ -661,7 +661,7 @@
             if (currentRole !== "admin" || !selectedChatUser) return;
             
             get(ref(db, `users/${selectedChatUser}/balance`)).then((snap) => {
-                let currentBal = snap.val() || 0;
+                let currentBal = snap.exists() ? snap.val() : 0;
                 let amount = prompt(`VIP Client [${selectedChatUser}]-এর বর্তমান ক্রেডিট: $${currentBal}\n\nনতুন ব্যালেন্স কত করতে চান? ($):`, currentBal);
                 let parsedAmount = parseFloat(amount);
 
