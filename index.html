@@ -21,6 +21,7 @@
             --border-gold: rgba(212, 175, 55, 0.35);
             --gold-glow: 0 0 20px rgba(212, 175, 55, 0.4);
             --neon-green: #00ff87;
+            --danger-red: #ff4757;
         }
 
         * {
@@ -41,7 +42,7 @@
             overflow: hidden;
         }
 
-        /* Responsive Royal Header */
+        /* Header */
         header {
             background: rgba(18, 19, 24, 0.98);
             backdrop-filter: blur(12px);
@@ -86,7 +87,6 @@
             flex-wrap: nowrap;
         }
 
-        /* Compact VIP Balance Badge */
         .balance-card {
             background: linear-gradient(145deg, #181a22, #0d0e12);
             border: 1px solid var(--gold-primary);
@@ -113,7 +113,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* Mobile Responsive Admin Exit Button */
         .admin-indicator {
             display: none;
             background: var(--gold-gradient);
@@ -127,7 +126,6 @@
             white-space: nowrap;
         }
 
-        /* VIP Banner */
         .auto-delete-banner {
             background: linear-gradient(90deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 0, 0.95), rgba(212, 175, 55, 0.12));
             color: var(--gold-light);
@@ -138,7 +136,6 @@
             flex-shrink: 0;
         }
 
-        /* Main App Layout */
         .chat-app-container {
             display: flex;
             flex: 1;
@@ -148,7 +145,6 @@
             overflow: hidden;
         }
 
-        /* Sidebar */
         .sidebar {
             width: 300px;
             background: var(--card-dark);
@@ -216,7 +212,25 @@
             font-size: 0.85rem;
         }
 
-        /* Chat Area - Compact Space */
+        .btn-delete-user {
+            background: var(--danger-red);
+            color: #fff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            transition: 0.2s;
+        }
+
+        .btn-delete-user:hover {
+            transform: scale(1.1);
+        }
+
         .chat-area {
             flex: 1;
             display: flex;
@@ -271,6 +285,11 @@
             font-size: 0.85rem;
         }
 
+        .admin-btn-group {
+            display: flex;
+            gap: 6px;
+        }
+
         .btn-add-balance {
             background: var(--gold-gradient);
             color: #000;
@@ -283,7 +302,18 @@
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
         }
 
-        /* Compact Messages Area */
+        .btn-ring-user {
+            background: #ff9f43;
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.78rem;
+            box-shadow: 0 0 10px rgba(255, 159, 67, 0.4);
+        }
+
         .chat-messages {
             flex: 1;
             padding: 12px;
@@ -294,7 +324,6 @@
             min-height: 0;
         }
 
-        /* Message Rows */
         .message-row {
             display: flex;
             flex-direction: column;
@@ -342,14 +371,41 @@
             border-bottom-left-radius: 2px;
         }
 
+        .img-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 4px;
+        }
+
         .chat-img-msg {
             max-width: 220px;
             max-height: 250px;
             border-radius: 10px;
-            margin-top: 4px;
             border: 1px solid var(--border-gold);
             cursor: pointer;
             display: block;
+        }
+
+        .btn-download-img {
+            margin-top: 5px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--gold-light);
+            border: 1px solid var(--border-gold);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+        }
+
+        .btn-download-img:hover {
+            background: var(--gold-primary);
+            color: #000;
         }
 
         .message-timer {
@@ -369,7 +425,6 @@
             font-style: italic;
         }
 
-        /* Compact Input Area */
         .chat-input-area {
             padding: 8px 12px;
             background: var(--card-dark);
@@ -431,7 +486,6 @@
             flex-shrink: 0;
         }
 
-        /* Loading Spinner */
         .upload-spinner {
             display: none;
             color: var(--gold-primary);
@@ -440,7 +494,6 @@
             gap: 5px;
         }
 
-        /* Mobile Fixes */
         @media (max-width: 768px) {
             .brand-logo span {
                 font-size: 0.82rem;
@@ -461,7 +514,7 @@
         }
     </style>
 </head>
-<body>
+<body onclick="enableAudioOnUserInteraction()">
 
     <!-- Header -->
     <header>
@@ -484,7 +537,7 @@
 
     <!-- Banner -->
     <div class="auto-delete-banner">
-        <i class="fa-solid fa-user-shield"></i> <b>SECURE🛡️:</b>  🔒Privet chat is enable🔒
+        <i class="fa-solid fa-user-shield"></i> <b>SECURE🛡️:</b> 🔒Privet chat is enable🔒
     </div>
 
     <!-- Container -->
@@ -515,7 +568,10 @@
                     </div>
                 </div>
 
-                <div id="adminActionBox" style="display: none;">
+                <div id="adminActionBox" class="admin-btn-group" style="display: none;">
+                    <button class="btn-ring-user" onclick="triggerRingToUser()">
+                        <i class="fa-solid fa-bell"></i> Ring
+                    </button>
                     <button class="btn-add-balance" onclick="giveBalanceToUser()">
                         <i class="fa-solid fa-pen-to-square"></i> Balance
                     </button>
@@ -564,12 +620,49 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Updated ImgBB API Key
         const IMGBB_API_KEY = "3ec345422ccf840557d8e17a1dd451fb"; 
-        const IMGBB_AUTO_EXPIRE_SECONDS = 600; // 10 Minutes Auto-Delete
+        const IMGBB_AUTO_EXPIRE_SECONDS = 600; 
 
         let currentRole = "user"; 
-        const DELETE_DELAY_MS = 60 * 1000; // 1 minute countdown
+        const DELETE_DELAY_MS = 60 * 1000;
+        let isFirstLoad = true;
+        let audioAllowed = false;
+
+        // Notification Sound Setup (Web Audio API Bell Sound)
+        function playAlertSound() {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = "sine";
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
+                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // A5
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            } catch (e) {
+                console.log("Audio play blocked");
+            }
+        }
+
+        window.enableAudioOnUserInteraction = function() {
+            if (!audioAllowed) {
+                audioAllowed = true;
+                if ("Notification" in window && Notification.permission !== "granted") {
+                    Notification.requestPermission();
+                }
+            }
+        };
+
+        function showDesktopNotification(title, body) {
+            playAlertSound();
+            if ("Notification" in window && Notification.permission === "granted") {
+                new Notification(title, { body: body, icon: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png" });
+            }
+        }
 
         function getDeviceUID() {
             let id = localStorage.getItem("permanent_vip_device_id");
@@ -583,7 +676,6 @@
         let myUserId = getDeviceUID();
         let selectedChatUser = myUserId;
 
-        // Save new user profile if not exist with default balance 0.00
         const userRef = ref(db, `users/${myUserId}`);
         get(userRef).then((snapshot) => {
             if (!snapshot.exists()) {
@@ -595,10 +687,17 @@
             }
         });
 
-        // Realtime Balance update for User Header with proper fallback
         onValue(ref(db, `users/${myUserId}/balance`), (snap) => {
             const bal = snap.exists() ? snap.val() : 0.00;
             document.getElementById("lblUserBalance").innerText = "$" + parseFloat(bal || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        });
+
+        // Listen for Admin Ring Event on User Side
+        onValue(ref(db, `users/${myUserId}/ring`), (snap) => {
+            if (snap.exists() && snap.val() === true) {
+                showDesktopNotification("🔔 VIP Urgent Ring!", "Chairman & CEO আপনাকে রিং করছেন!");
+                update(ref(db, `users/${myUserId}`), { ring: false });
+            }
         });
 
         // Secret Admin Entrance
@@ -627,7 +726,7 @@
             const sidebar = document.getElementById("adminSidebar");
             sidebar.classList.remove("hidden-user");
             sidebar.classList.remove("mobile-hide");
-            document.getElementById("adminActionBox").style.display = "block";
+            document.getElementById("adminActionBox").style.display = "flex";
             document.getElementById("adminIndicator").style.display = "block";
             listenUserListAdmin();
         }
@@ -656,6 +755,14 @@
             document.getElementById("messageInput").placeholder = "গোপন বার্তা লিখুন...";
         }
 
+        // Admin Trigger Ring
+        window.triggerRingToUser = function() {
+            if (currentRole !== "admin" || !selectedChatUser) return;
+            update(ref(db, `users/${selectedChatUser}`), { ring: true }).then(() => {
+                alert(`🔔 Client [${selectedChatUser}]-এর ফোনে রিং পাঠানো হয়েছে!`);
+            });
+        };
+
         // Admin Edit Balance
         window.giveBalanceToUser = function() {
             if (currentRole !== "admin" || !selectedChatUser) return;
@@ -674,6 +781,25 @@
                     });
                 }
             });
+        };
+
+        // Admin Delete VIP User Permanently
+        window.deleteUserByAdmin = function(event, uid) {
+            event.stopPropagation();
+            if (currentRole !== "admin") return;
+
+            let confirmDel = confirm(`⚠️ আপনি কি নিশ্চিতভাবে ক্লায়েন্ট [${uid}] এবং তার সমস্ত বার্তা ডিলিট করতে চান?`);
+            if (confirmDel) {
+                remove(ref(db, `users/${uid}`));
+                remove(ref(db, `chats/${uid}`)).then(() => {
+                    alert(`🗑️ Client [${uid}] সফলভাবে মুছে ফেলা হয়েছে!`);
+                    if (selectedChatUser === uid) {
+                        selectedChatUser = myUserId;
+                        setupUserHeader();
+                        listenMessages();
+                    }
+                });
+            }
         };
 
         // Send Text Message
@@ -778,6 +904,9 @@
                                 <br><small style="color:var(--neon-green); font-size:0.75rem;">Credit: $${(u.balance || 0).toFixed(2)}</small>
                             </div>
                         </div>
+                        <button class="btn-delete-user" onclick="deleteUserByAdmin(event, '${uid}')" title="ইউজার ডিলিট করুন">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
                     `;
                     item.onclick = () => {
                         selectedChatUser = uid;
@@ -797,10 +926,12 @@
             });
         }
 
-        // Realtime Messages Engine
+        // Realtime Messages & Notification Engine
         function listenMessages() {
             const targetUser = currentRole === "admin" ? selectedChatUser : myUserId;
             if (!targetUser) return;
+
+            isFirstLoad = true;
 
             onValue(ref(db, `chats/${targetUser}`), (snapshot) => {
                 const container = document.getElementById("chatMessages");
@@ -813,6 +944,7 @@
                 }
 
                 const now = Date.now();
+                let lastMsg = null;
 
                 Object.keys(data).forEach((msgId) => {
                     const msg = data[msgId];
@@ -838,7 +970,16 @@
 
                     let contentHtml = "";
                     if (msg.type === "image") {
-                        contentHtml = `<a href="${msg.imageUrl}" target="_blank"><img src="${msg.imageUrl}" class="chat-img-msg" alt="Secret Image" /></a>`;
+                        contentHtml = `
+                            <div class="img-container">
+                                <a href="${msg.imageUrl}" target="_blank">
+                                    <img src="${msg.imageUrl}" class="chat-img-msg" alt="Secret Image" />
+                                </a>
+                                <a href="${msg.imageUrl}" download="VIP_Secret_Image.jpg" target="_blank" class="btn-download-img">
+                                    <i class="fa-solid fa-download"></i> Save Image
+                                </a>
+                            </div>
+                        `;
                     } else {
                         contentHtml = escapeHTML(msg.text);
                     }
@@ -854,8 +995,15 @@
                     `;
 
                     container.appendChild(row);
+                    lastMsg = msg;
                 });
 
+                // Play notification if new message received from opposite party
+                if (!isFirstLoad && lastMsg && lastMsg.sender !== currentRole) {
+                    showDesktopNotification("👑 VIP Message!", lastMsg.type === "image" ? "📷 একটি নতুন সিক্রেট ছবি এসেছে!" : lastMsg.text);
+                }
+
+                isFirstLoad = false;
                 container.scrollTop = container.scrollHeight;
             });
         }
@@ -866,7 +1014,6 @@
             );
         }
 
-        // Realtime Timer Loop
         setInterval(() => {
             const now = Date.now();
             const timers = document.querySelectorAll(".time-count");
@@ -883,7 +1030,6 @@
             });
         }, 1000);
 
-        // App Init
         setupUserHeader();
         listenMessages();
     </script>
