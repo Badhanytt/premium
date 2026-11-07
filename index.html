@@ -288,9 +288,10 @@
         .admin-btn-group {
             display: flex;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
-        .btn-add-balance {
+        .btn-add-balance, .btn-auto-msg {
             background: var(--gold-gradient);
             color: #000;
             border: none;
@@ -514,7 +515,7 @@
         }
     </style>
 </head>
-<body onclick="enableAudioOnUserInteraction()">
+<body>
 
     <!-- Header -->
     <header>
@@ -569,6 +570,9 @@
                 </div>
 
                 <div id="adminActionBox" class="admin-btn-group" style="display: none;">
+                    <button class="btn-auto-msg" onclick="setupAutoReplyMessage()">
+                        <i class="fa-solid fa-robot"></i> Auto Reply
+                    </button>
                     <button class="btn-ring-user" onclick="triggerRingToUser()">
                         <i class="fa-solid fa-bell"></i> Ring
                     </button>
@@ -626,44 +630,8 @@
         let currentRole = "user"; 
         const DELETE_DELAY_MS = 60 * 1000;
         let isFirstLoad = true;
-        let audioAllowed = false;
 
-        // Notification Sound Setup (Web Audio API Bell Sound)
-        function playAlertSound() {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-                osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.3); // A5
-                gain.gain.setValueAtTime(0.3, ctx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + 0.5);
-            } catch (e) {
-                console.log("Audio play blocked");
-            }
-        }
-
-        window.enableAudioOnUserInteraction = function() {
-            if (!audioAllowed) {
-                audioAllowed = true;
-                if ("Notification" in window && Notification.permission !== "granted") {
-                    Notification.requestPermission();
-                }
-            }
-        };
-
-        function showDesktopNotification(title, body) {
-            playAlertSound();
-            if ("Notification" in window && Notification.permission === "granted") {
-                new Notification(title, { body: body, icon: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png" });
-            }
-        }
-
+        // Permanent Device UID Lock (এক ফোনে একটি মাত্র অ্যাকাউন্ট নিশ্চিত করতে)
         function getDeviceUID() {
             let id = localStorage.getItem("permanent_vip_device_id");
             if (!id) {
@@ -682,7 +650,8 @@
                 set(userRef, {
                     userId: myUserId,
                     balance: 0.00,
-                    joinedAt: Date.now()
+                    joinedAt: Date.now(),
+                    autoReplySent: false
                 });
             }
         });
@@ -690,14 +659,6 @@
         onValue(ref(db, `users/${myUserId}/balance`), (snap) => {
             const bal = snap.exists() ? snap.val() : 0.00;
             document.getElementById("lblUserBalance").innerText = "$" + parseFloat(bal || 0).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-        });
-
-        // Listen for Admin Ring Event on User Side
-        onValue(ref(db, `users/${myUserId}/ring`), (snap) => {
-            if (snap.exists() && snap.val() === true) {
-                showDesktopNotification("🔔 VIP Urgent Ring!", "Chairman & CEO আপনাকে রিং করছেন!");
-                update(ref(db, `users/${myUserId}`), { ring: false });
-            }
         });
 
         // Secret Admin Entrance
@@ -754,6 +715,20 @@
             document.getElementById("userStatusSub").innerText = "● Secured Direct Line Active";
             document.getElementById("messageInput").placeholder = "গোপন বার্তা লিখুন...";
         }
+
+        // Admin Auto-Reply Message Configuration
+        window.setupAutoReplyMessage = function() {
+            if (currentRole !== "admin") return;
+            get(ref(db, "settings/autoReply")).then((snap) => {
+                let currentAuto = snap.exists() ? snap.val() : "ধন্যবাদ আপনার বার্তার জন্য। চেয়ারম্যান বর্তমানে ব্যস্ত আছেন, শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।";
+                let newAuto = prompt("🤖 ইউজার মেসেজ পাঠালে যে অটো-রিপ্লাই দিতে চান তা লিখুন:", currentAuto);
+                if (newAuto !== null) {
+                    set(ref(db, "settings/autoReply"), newAuto).then(() => {
+                        alert("✅ অটো-রিপ্লাই সফলভাবে সেট করা হয়েছে!");
+                    });
+                }
+            });
+        };
 
         // Admin Trigger Ring
         window.triggerRingToUser = function() {
@@ -844,7 +819,7 @@
             });
         };
 
-        // Push Message Engine
+        // Push Message Engine & Smart Auto-Reply Logic
         function pushMsgToFirebase(payload) {
             const chatRoomId = currentRole === "admin" ? selectedChatUser : myUserId;
             const messagesRef = ref(db, `chats/${chatRoomId}`);
@@ -872,7 +847,41 @@
                     expireAt: null 
                 };
 
-                set(newMsgRef, msgData);
+                set(newMsgRef, msgData).then(() => {
+                    // যদি ইউজার মেসেজ পাঠায়
+                    if (currentRole === "user") {
+                        get(ref(db, `users/${myUserId}`)).then((userSnap) => {
+                            const userData = userSnap.val() || {};
+                            const autoReplySent = userData.autoReplySent || false;
+
+                            // যদি এর আগে অটো-রিপ্লাই পাঠানো না হয়ে থাকে, তবেই শুধু অটো-রিপ্লাই যাবে
+                            if (!autoReplySent) {
+                                get(ref(db, "settings/autoReply")).then((autoSnap) => {
+                                    let autoText = autoSnap.exists() ? autoSnap.val() : "ধন্যবাদ আপনার বার্তার জন্য। চেয়ারম্যান বর্তমানে ব্যস্ত আছেন, শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।";
+                                    
+                                    setTimeout(() => {
+                                        const autoMsgRef = push(messagesRef);
+                                        set(autoMsgRef, {
+                                            sender: "admin",
+                                            type: "text",
+                                            text: autoText,
+                                            imageUrl: "",
+                                            timestamp: Date.now(),
+                                            expireAt: null
+                                        }).then(() => {
+                                            // ফ্ল্যাগ ট্রু করে দেওয়া হলো যাতে এডমিন রিপ্লাই না দেওয়া পর্যন্ত আর অটো-মেসেজ না যায়
+                                            update(ref(db, `users/${myUserId}`), { autoReplySent: true });
+                                        });
+                                    }, 1000);
+                                });
+                            }
+                        });
+                    } 
+                    // যদি এডমিন নিজে মেসেজ/রিপ্লাই দেন, তবে ফ্ল্যাগ ফলস করে দেওয়া হবে যাতে পরবর্তীতে আবার ইউজার মেসেজ দিলে অটো-রিপ্লাই কাজ করে
+                    else if (currentRole === "admin") {
+                        update(ref(db, `users/${selectedChatUser}`), { autoReplySent: false });
+                    }
+                });
             });
         }
 
@@ -926,7 +935,7 @@
             });
         }
 
-        // Realtime Messages & Notification Engine
+        // Realtime Messages Engine
         function listenMessages() {
             const targetUser = currentRole === "admin" ? selectedChatUser : myUserId;
             if (!targetUser) return;
@@ -944,7 +953,6 @@
                 }
 
                 const now = Date.now();
-                let lastMsg = null;
 
                 Object.keys(data).forEach((msgId) => {
                     const msg = data[msgId];
@@ -995,13 +1003,7 @@
                     `;
 
                     container.appendChild(row);
-                    lastMsg = msg;
                 });
-
-                // Play notification if new message received from opposite party
-                if (!isFirstLoad && lastMsg && lastMsg.sender !== currentRole) {
-                    showDesktopNotification("👑 VIP Message!", lastMsg.type === "image" ? "📷 একটি নতুন সিক্রেট ছবি এসেছে!" : lastMsg.text);
-                }
 
                 isFirstLoad = false;
                 container.scrollTop = container.scrollHeight;
